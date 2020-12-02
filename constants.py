@@ -1,5 +1,8 @@
+from shapely.geometry import Point
 from shapely.geometry.polygon import Polygon
 
+TURKEY_LOCATION = Point(39.0, 35.0)
+TURKEY_RADIUS = '750km'
 TURKEY_POLYGON = Polygon([(41.94563203335467,26.52655201415642),
                           (36.08880491986784,26.304391072896365),
                           (35.911042371141775,36.082223104146365),
