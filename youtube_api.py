@@ -3,7 +3,7 @@ from googleapiclient.discovery import build
 import time
 import json
 
-youtube_api_key = 'AIzaSyDuD7QzJKawbnhkupYvbn7dievqf_Yqr6k'
+youtube_api_key = 'AIzaSyB9UlGN9HNGavKUHxXPYngBy3IGKhwduPs'
 youtube = build('youtube', 'v3', developerKey=youtube_api_key)
 
 from_date = '2019-03-01T00:00:00Z'
@@ -13,7 +13,7 @@ videos_api = youtube.videos()
 video_categories_api = youtube.videoCategories()
 
 location = '39.0, 35.0'
-location_radius = '750km'
+location_radius = '600km'
 query_string = ''
 
 def get_categories():
@@ -101,20 +101,27 @@ def get_videos_from_search_data_list(search_datas):
     return all_videos
 
 
-def normalize_videos_data(videos):
+def fetch_category_names(videos):
     categories = get_categories()
 
-    for video in videos['items']:
-        category_id = video['snippet']['categoryId']
+    for video in videos:
+        category_id = video['categoryId']
         category_name = categories[category_id]
-        video['snippet']['categoryName'] = category_name
+        video['categoryName'] = category_name
 
     return videos
 
 
-def read_data_from_file(path):
-    data_file = open(path, 'r')
-    data_txt = data_file.read()
-    data = json.loads(data_txt)
+def simplify_videos_data(videos, required_properties):
+    videos = fetch_category_names(videos)
 
-    return data
+    simplified_video_list = []
+    for video in videos:
+        simplified_video = {}
+        for key, properties in required_properties.items():
+            video_property_values = video.get(key)
+            for _property in properties:
+                simplified_video[_property] = video_property_values.get(_property)
+        simplified_video_list.append(simplified_video)
+
+    return simplified_video_list
