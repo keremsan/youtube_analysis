@@ -1,13 +1,18 @@
-from shapely.geometry import Point
-from shapely.geometry.polygon import Polygon
+YOUTUBE_API_KEY = ''
 
-TURKEY_LOCATION = Point(39.0, 35.0)
+TURKEY_LOCATION = '39.0, 35.0'
 TURKEY_RADIUS = '750km'
-TURKEY_POLYGON = Polygon([(41.94563203335467,26.52655201415642),
-                          (36.08880491986784,26.304391072896365),
-                          (35.911042371141775,36.082223104146365),
-                          (36.93646811547311,36.851266072896365),
-                          (37.25194206402583,44.585641072896365),
-                          (41.512453967932274,42.67401997914636)])
-AMERICA_LOCATION = Point(39.009730, -99.662595)
-AMERICA_RADIUS = '2500km'
+TURKEY_VIDEOS_PATH_BEFORE = '../data/turkey_before.txt'
+TURKEY_VIDEOS_PATH_AFTER = '../data/turkey_after.txt'
+
+USA_LOCATION = '39.009730,-99.662595'
+USA_RADIUS = '2500km'
+USA_VIDEOS_PATH_BEFORE = '../data/usa_before.txt'
+USA_VIDEOS_PATH_AFTER = '../data/usa_after.txt'
+
+REQUIRED_PROPERTIES = {
+    'snippet': ['publishedAt', 'title', 'categoryId'],
+    'contentDetails': ['duration'],
+    'statistics': ['viewCount', 'likeCount', 'dislikeCount', 'favoriteCount', 'commentCount'],
+    'recordingDetails': ['location']
+}

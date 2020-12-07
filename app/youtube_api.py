@@ -1,20 +1,10 @@
-from googleapiclient.discovery import build
+from constants import YOUTUBE_API_KEY
 
-import time
-import json
-
-youtube_api_key = 'AIzaSyB9UlGN9HNGavKUHxXPYngBy3IGKhwduPs'
-youtube = build('youtube', 'v3', developerKey=youtube_api_key)
-
-from_date = '2019-03-01T00:00:00Z'
-to_date = '2019-11-30T00:00:00Z'
+youtube = build('youtube', 'v3', developerKey=YOUTUBE_API_KEY)
 search_api = youtube.search()
 videos_api = youtube.videos()
 video_categories_api = youtube.videoCategories()
 
-location = '39.0, 35.0'
-location_radius = '600km'
-query_string = ''
 
 def get_categories():
     category_ids = ','.join([str(cid) for cid in list(range(45))])
