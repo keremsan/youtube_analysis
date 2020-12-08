@@ -2,18 +2,18 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib.pyplot import figure
 
-from constants import (
+from app.constants import (
     TURKEY_VIDEOS_PATH_AFTER as turkey_videos_after_path,
     TURKEY_VIDEOS_PATH_BEFORE as turkey_videos_before_path,
     USA_VIDEOS_PATH_AFTER as usa_videos_after_path,
     USA_VIDEOS_PATH_BEFORE as usa_videes_before_path,
 )
-from helpers import read_data_from_file
+from app.helpers import read_data_from_file
 
 
 ## TURKEY
-turkey_videos_before = read_data_from_file(TURKEY_VIDEOS_PATH_BEFORE)
-turkey_videos_after = read_data_from_file(TURKEY_VIDEOS_PATH_AFTER)
+turkey_videos_before = read_data_from_file(turkey_videos_before_path)
+turkey_videos_after = read_data_from_file(turkey_videos_after_path)
 
 turkey_before = pd.DataFrame(turkey_videos_before)
 turkey_after = pd.DataFrame(turkey_videos_after)

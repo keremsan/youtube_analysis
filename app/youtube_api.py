@@ -1,4 +1,6 @@
-from constants import YOUTUBE_API_KEY
+from googleapiclient.discovery import build
+
+from app.constants import YOUTUBE_API_KEY
 
 youtube = build('youtube', 'v3', developerKey=YOUTUBE_API_KEY)
 search_api = youtube.search()
@@ -89,29 +91,3 @@ def get_videos_from_search_data_list(search_datas):
         all_videos.extend(videos['items'])
 
     return all_videos
-
-
-def fetch_category_names(videos):
-    categories = get_categories()
-
-    for video in videos:
-        category_id = video['categoryId']
-        category_name = categories[category_id]
-        video['categoryName'] = category_name
-
-    return videos
-
-
-def simplify_videos_data(videos, required_properties):
-    videos = fetch_category_names(videos)
-
-    simplified_video_list = []
-    for video in videos:
-        simplified_video = {}
-        for key, properties in required_properties.items():
-            video_property_values = video.get(key)
-            for _property in properties:
-                simplified_video[_property] = video_property_values.get(_property)
-        simplified_video_list.append(simplified_video)
-
-    return simplified_video_list
